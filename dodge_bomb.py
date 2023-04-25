@@ -12,6 +12,9 @@ delta = {
         }
 
 
+accs = [a for a in range(1, 11)]
+
+
 def check_bound(scr_rct: pg.Rect, obj_rct: pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内or画面街を判定し、真理値タプルを返すような関数
@@ -47,6 +50,13 @@ def main():
     bb_rct = bb_img.get_rect()
     bb_rct.center = x,y
 
+    """kk_imgs = {
+        (0,-1):pg.transform.rotozoom(kk_img, 270, 1.0),
+        (1,0):pg.transform.rotozoom(kk_img, 90, 1.0),
+        (0,1):pg.transform.rotozoom(kk_img, 180, 1.0),
+        (-1,0):pg.transform.rotozoom(kk_img, 90, 1.0)
+    }""" # 追加課題1の試作
+
     tmr = 0
 
     while True:
@@ -56,21 +66,23 @@ def main():
 
         tmr += 1
 
+        avx, avy = vx*accs[min(tmr//1000, 9)], vy*accs[min(tmr//1000, 9)]
+
         key_lst = pg.key.get_pressed()
         for k, mv in delta.items():
             if key_lst[k]:
                 kk_rct.move_ip(mv)
+                # kk_img = kk_imgs[mv]　追加課題1の試作
 
         if check_bound(screen.get_rect(), kk_rct) != (True,True):
             for k, mv in delta.items():
                 if key_lst[k]:
                     kk_rct.move_ip(-mv[0],-mv[1])
 
-
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct) 
 
-        bb_rct.move_ip(vx,vy)
+        bb_rct.move_ip(avx,avy)
         screen.blit(bb_img, bb_rct)
         yoko,tate = check_bound(screen.get_rect(),bb_rct)
         if not yoko:
@@ -80,7 +92,6 @@ def main():
 
         if kk_rct.colliderect(bb_rct):
             return
-            
 
         pg.display.update()
         clock.tick(1000)
