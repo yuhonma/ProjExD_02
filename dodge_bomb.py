@@ -38,8 +38,6 @@ def a_index(time: int) -> int:
     """
     return min(time//1000, 9)
 
-    
-
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
