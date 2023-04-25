@@ -30,6 +30,16 @@ def check_bound(scr_rct: pg.Rect, obj_rct: pg.Rect) -> tuple[bool, bool]:
         tate = False
     return yoko, tate
 
+def a_index(time: int) -> int:
+    """
+    時間に応じて10段階に0~9までの値を返す関数
+    引数:時間経過を表現する変数
+    戻り値:10段階に加速度が格納されているインデックス数
+    """
+    return min(time//1000, 9)
+
+    
+
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
@@ -68,7 +78,7 @@ def main():
 
         tmr += 1
 
-        avx, avy = vx*accs[min(tmr//1000, 9)], vy*accs[min(tmr//1000, 9)] # 時間が立つごとに加速度が段階的に増加する変数
+        avx, avy = vx*accs[a_index(tmr)], vy*accs[a_index(tmr)] # 時間が立つごとに加速度が段階的に増加する変数
 
         key_lst = pg.key.get_pressed()
         for k, mv in delta.items():
