@@ -61,12 +61,12 @@ def main():
     bb_rct = bb_img.get_rect()
     bb_rct.center = x,y
 
-    """kk_imgs = {
+    kk_imgs = {
         (0,-1):pg.transform.rotozoom(kk_img, 270, 1.0),
-        (1,0):pg.transform.rotozoom(kk_img, 90, 1.0),
+        (1,0):pg.transform.flip(pg.transform.rotozoom(kk_img, 0, 1.0),True,False),
         (0,1):pg.transform.rotozoom(kk_img, 180, 1.0),
-        (-1,0):pg.transform.rotozoom(kk_img, 90, 1.0)
-    }""" # 追加課題1の試作
+        (-1,0):pg.transform.rotozoom(kk_img, 0, 1.0)
+    }
 
     tmr = 0
     overtime = -1
@@ -84,7 +84,7 @@ def main():
         for k, mv in delta.items():
             if key_lst[k]:
                 kk_rct.move_ip(mv)
-                # kk_img = kk_imgs[mv]　追加課題1の試作
+                kk_img = kk_imgs[mv]
 
         if check_bound(screen.get_rect(), kk_rct) != (True,True):
             for k, mv in delta.items():
