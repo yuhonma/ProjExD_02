@@ -58,7 +58,8 @@ def main():
     }""" # 追加課題1の試作
 
     tmr = 0
-
+    overtime = -1
+    gameover = False
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -91,6 +92,13 @@ def main():
             vy *= -1
 
         if kk_rct.colliderect(bb_rct):
+            kk_img = pg.image.load("./ex02/fig/8.png")
+            kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+
+            overtime = tmr
+            gameover = True
+        
+        if gameover and (tmr - overtime) > 200:
             return
 
         pg.display.update()
