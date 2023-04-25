@@ -9,10 +9,10 @@ delta = {
         pg.K_DOWN: (0,1),
         pg.K_LEFT: (-1,0),
         pg.K_RIGHT: (1,0)
-        }
+        } # キー制御
 
 
-accs = [a for a in range(1, 11)]
+accs = [a for a in range(1, 11)] # 加速度リスト
 
 
 def check_bound(scr_rct: pg.Rect, obj_rct: pg.Rect) -> tuple[bool, bool]:
@@ -48,7 +48,6 @@ def main():
     bb_img.set_colorkey((0,0,0))
     x,y = random.randint(0,1600),random.randint(0,900)
     vx,vy = +1,+1
-
     bb_rct = bb_img.get_rect()
     bb_rct.center = x,y
 
