@@ -78,6 +78,10 @@ def main():
         if not tate:
             vy *= -1
 
+        if kk_rct.colliderect(bb_rct):
+            return
+            
+
         pg.display.update()
         clock.tick(1000)
 
