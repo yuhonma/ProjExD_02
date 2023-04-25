@@ -40,6 +40,8 @@ def main():
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900,400
+    fonto  = pg.font.Font(None, 80)
+    txt = fonto.render(str("GAMEOVER"), True, (255, 0, 0))
 
     bb_img = pg.Surface((20,20))
     pg.draw.circle(bb_img, (255,0,0), (10,10),10)
@@ -94,12 +96,13 @@ def main():
         if kk_rct.colliderect(bb_rct):
             kk_img = pg.image.load("./ex02/fig/8.png")
             kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
-
             overtime = tmr
             gameover = True
         
-        if gameover and (tmr - overtime) > 200:
-            return
+        if gameover:
+            screen.blit(txt, [650, 450])
+            if (tmr - overtime) > 200:
+                return
 
         pg.display.update()
         clock.tick(1000)
