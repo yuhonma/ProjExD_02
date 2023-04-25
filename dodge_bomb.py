@@ -68,7 +68,7 @@ def main():
 
         tmr += 1
 
-        avx, avy = vx*accs[min(tmr//1000, 9)], vy*accs[min(tmr//1000, 9)]
+        avx, avy = vx*accs[min(tmr//1000, 9)], vy*accs[min(tmr//1000, 9)] # 時間が立つごとに加速度が段階的に増加する変数
 
         key_lst = pg.key.get_pressed()
         for k, mv in delta.items():
